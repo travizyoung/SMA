@@ -1,19 +1,19 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import style from './style';
+
+import UserProfileImage from '../UserProfileImage/UserProfileImage';
 
 const UserStory = ({
   firstName,
   profileImage,
 }: {
   firstName: string;
-  profileImage: object;
+  profileImage: any;
 }) => {
   return (
     <View style={style.storyContainer}>
-      <View style={style.userImageContainer}>
-        <Image source={profileImage} />
-      </View>
+      <UserProfileImage profileImage={profileImage} imageDimensions={65} />
       <Text style={style.firstName}>{firstName}</Text>
     </View>
   );
