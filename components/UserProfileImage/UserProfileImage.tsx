@@ -16,6 +16,7 @@ const UserProfileImage = ({
         style={{
           width: imageDimensions,
           height: imageDimensions,
+          borderRadius: imageDimensions,
         }}
       />
     </View>
