@@ -56,7 +56,7 @@ const App = () => {
       profileImage: require('./assets/images/default_profile.png'),
     },
   ];
-  const userStoriesPageSize = 4;
+  const userStoriesPageSize = 6;
   const [userStoriesCurrentPage, setUserStoriesCurrentPage] = useState(1);
   const [userStoriesRenderedData, setUserStoriesRenderedData] = useState<
     UserStory[]
@@ -132,10 +132,10 @@ const App = () => {
   >([]);
   const [isLoadingUserPosts, setIsLoadingUserPosts] = useState(false);
   const pagination = (
-    database: UserStory[],
+    database: any[],
     currentPage: number,
     pageSize: number,
-  ): UserStory[] => {
+  ): any[] => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     if (startIndex >= database.length) {
@@ -152,10 +152,34 @@ const App = () => {
     setIsLoadingUserStories(false);
   }, []);
 
+  useEffect(() => {
+    setIsLoadingUserPosts(true);
+    const getInitialData = pagination(userPosts, 1, userPostsPageSize);
+    setUserPostsRenderedData(getInitialData);
+    setIsLoadingUserPosts(false);
+  }, []);
+
   return (
     <SafeAreaView>
       <View>
         <FlatList
+          onEndReached={() => {
+            if (isLoadingUserPosts) {
+              return;
+            }
+
+            setIsLoadingUserPosts(true);
+            const contentToAppend = pagination(
+              userPosts,
+              userPostsCurrentPage + 1,
+              userPostsPageSize,
+            );
+            if (contentToAppend.length > 0) {
+              setUserPostsCurrentPage(prev => prev + 1);
+              setUserPostsRenderedData(prev => [...prev, ...contentToAppend]);
+            }
+            setIsLoadingUserPosts(false);
+          }}
           ListHeaderComponent={
             <>
               <View style={globalStyle.header}>
@@ -174,7 +198,6 @@ const App = () => {
 
               <View style={globalStyle.userStoriesContainer}>
                 <FlatList
-                  onEndReachedThreshold={0.5}
                   onEndReached={() => {
                     if (isLoadingUserStories) {
                       return;
@@ -204,7 +227,7 @@ const App = () => {
             </>
           }
           showsVerticalScrollIndicator={false}
-          data={userPosts}
+          data={userPostsRenderedData}
           renderItem={({item}) => (
             <View style={globalStyle.userPostContainer}>
               <UserPost {...item} />
