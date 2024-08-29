@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   TouchableOpacity,
@@ -13,7 +13,7 @@ import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import globalStyle from './assets/styles/globalStyle';
 
 const App = () => {
-  const userStories = [
+  const userStories: UserStory[] = [
     {
       firstName: 'Joseph',
       id: 1,
@@ -55,6 +55,35 @@ const App = () => {
       profileImage: require('./assets/images/default_profile.png'),
     },
   ];
+
+  const userStoriesPageSize = 4;
+  const [userStoriesCurrentPage, setUserStoriesCurrentPage] = useState(1);
+  const [userStoriesRenderedData, setUserStoriesRenderedData] = useState<
+    UserStory[]
+  >([]);
+  const [isLoadingUserStories, setIsLoadingUserStories] = useState(false);
+
+  const pagination = (
+    database: UserStory[],
+    currentPage: number,
+    pageSize: number,
+  ): UserStory[] => {
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    if (startIndex >= database.length) {
+      return [];
+    }
+
+    return database.slice(startIndex, endIndex);
+  };
+
+  useEffect(() => {
+    setIsLoadingUserStories(true);
+    const getInitialData = pagination(userStories, 1, userStoriesPageSize);
+    setUserStoriesRenderedData(getInitialData);
+    setIsLoadingUserStories(false);
+  }, []);
+
   return (
     <SafeAreaView>
       <View style={globalStyle.header}>
@@ -69,10 +98,28 @@ const App = () => {
 
       <View style={globalStyle.userStoriesContainer}>
         <FlatList
+          onEndReachedThreshold={0.5}
+          onEndReached={() => {
+            if (isLoadingUserStories) {
+              return;
+            }
+
+            setIsLoadingUserStories(true);
+            const contentToAppend = pagination(
+              userStories,
+              userStoriesCurrentPage + 1,
+              userStoriesPageSize,
+            );
+            if (contentToAppend.length > 0) {
+              setUserStoriesCurrentPage(prev => prev + 1);
+              setUserStoriesRenderedData(prev => [...prev, ...contentToAppend]);
+            }
+            setIsLoadingUserStories(false);
+          }}
           showsHorizontalScrollIndicator={false}
           horizontal
-          data={userStories}
-          renderItem={({item}) => <UserStory {...item} />}
+          data={userStoriesRenderedData}
+          renderItem={({item}) => <UserStory key={item.id} {...item} />}
         />
       </View>
     </SafeAreaView>

@@ -35,6 +35,8 @@ const globalStyle = StyleSheet.create({
 
   userStoriesContainer: {
     marginTop: 20,
+    paddingLeft: 27,
+    paddingRight: 17,
   },
 });
 
