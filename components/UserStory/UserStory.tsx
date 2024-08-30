@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import style from './style';
 
 import UserProfileImage from '../UserProfileImage/UserProfileImage';
+import {horizontalScale} from '../../utils/scaling';
 
 const UserStory = ({
   firstName,
@@ -13,7 +14,10 @@ const UserStory = ({
 }) => {
   return (
     <View style={style.storyContainer}>
-      <UserProfileImage profileImage={profileImage} imageDimensions={65} />
+      <UserProfileImage
+        profileImage={profileImage}
+        imageDimensions={horizontalScale(65)}
+      />
       <Text style={style.firstName}>{firstName}</Text>
     </View>
   );

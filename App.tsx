@@ -12,6 +12,7 @@ import UserPost from './components/UserPost/UserPost';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import globalStyle from './assets/styles/globalStyle';
+import {horizontalScale} from './utils/scaling';
 
 const App = () => {
   const userStories: UserStory[] = [
@@ -187,7 +188,7 @@ const App = () => {
                 <TouchableOpacity style={globalStyle.messageIcon}>
                   <FontAwesomeIcon
                     icon={faEnvelope}
-                    size={20}
+                    size={horizontalScale(20)}
                     color="#898DAE"
                   />
                   <View style={globalStyle.messageNumberContainer}>
