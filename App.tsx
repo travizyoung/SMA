@@ -5,6 +5,8 @@ import {
   View,
   Text,
   FlatList,
+  Platform,
+  StatusBar,
 } from 'react-native';
 import Title from './components/Title/Title';
 import UserStory from './components/UserStory/UserStory';
@@ -15,6 +17,7 @@ import globalStyle from './assets/styles/globalStyle';
 import {horizontalScale} from './utils/scaling';
 
 const App = () => {
+  console.log(Platform);
   const userStories: UserStory[] = [
     {
       firstName: 'Joseph',
@@ -162,6 +165,7 @@ const App = () => {
 
   return (
     <SafeAreaView>
+      <StatusBar backgroundColor={'#FFFFFF'} barStyle={'dark-content'} />
       <View>
         <FlatList
           onEndReached={() => {
