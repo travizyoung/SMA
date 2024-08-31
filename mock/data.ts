@@ -2,42 +2,42 @@ const userStories: UserStory[] = [
   {
     firstName: 'Joseph',
     id: 1,
-    profileImage: require('../../assets/images/default_profile.png'),
+    profileImage: require('../assets/images/default_profile.png'),
   },
   {
     firstName: 'Tom',
     id: 2,
-    profileImage: require('../../assets/images/default_profile.png'),
+    profileImage: require('../assets/images/default_profile.png'),
   },
   {
     firstName: 'John',
     id: 3,
-    profileImage: require('../../assets/images/default_profile.png'),
+    profileImage: require('../assets/images/default_profile.png'),
   },
   {
     firstName: 'Jane',
     id: 4,
-    profileImage: require('../../assets/images/default_profile.png'),
+    profileImage: require('../assets/images/default_profile.png'),
   },
   {
     firstName: 'Mark',
     id: 5,
-    profileImage: require('../../assets/images/default_profile.png'),
+    profileImage: require('../assets/images/default_profile.png'),
   },
   {
     firstName: 'Sarah',
     id: 6,
-    profileImage: require('../../assets/images/default_profile.png'),
+    profileImage: require('../assets/images/default_profile.png'),
   },
   {
     firstName: 'Emily',
     id: 7,
-    profileImage: require('../../assets/images/default_profile.png'),
+    profileImage: require('../assets/images/default_profile.png'),
   },
   {
     firstName: 'Michael',
     id: 8,
-    profileImage: require('../../assets/images/default_profile.png'),
+    profileImage: require('../assets/images/default_profile.png'),
   },
 ];
 
@@ -50,7 +50,7 @@ const userPosts: UserPost[] = [
     comments: 0,
     bookmarks: 0,
     location: 'San Diego, CA',
-    image: require('../../assets/images/default_post.png'),
+    image: require('../assets/images/default_post.png'),
   },
   {
     firstName: 'Tom',
@@ -60,7 +60,7 @@ const userPosts: UserPost[] = [
     comments: 0,
     bookmarks: 0,
     location: 'San Diego, CA',
-    image: require('../../assets/images/default_post.png'),
+    image: require('../assets/images/default_post.png'),
   },
   {
     firstName: 'John',
@@ -70,7 +70,7 @@ const userPosts: UserPost[] = [
     comments: 0,
     bookmarks: 0,
     location: 'San Diego, CA',
-    image: require('../../assets/images/default_post.png'),
+    image: require('../assets/images/default_post.png'),
   },
   {
     firstName: 'Jane',
@@ -80,7 +80,7 @@ const userPosts: UserPost[] = [
     comments: 0,
     bookmarks: 0,
     location: 'San Diego, CA',
-    image: require('../../assets/images/default_post.png'),
+    image: require('../assets/images/default_post.png'),
   },
   {
     firstName: 'Mark',
@@ -90,7 +90,7 @@ const userPosts: UserPost[] = [
     comments: 0,
     bookmarks: 0,
     location: 'San Diego, CA',
-    image: require('../../assets/images/default_post.png'),
+    image: require('../assets/images/default_post.png'),
   },
   {
     firstName: 'Sarah',
@@ -100,7 +100,7 @@ const userPosts: UserPost[] = [
     comments: 0,
     bookmarks: 0,
     location: 'San Diego, CA',
-    image: require('../../assets/images/default_post.png'),
+    image: require('../assets/images/default_post.png'),
   },
 ];
 

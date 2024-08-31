@@ -16,8 +16,9 @@ import style from './style';
 import {horizontalScale} from '../../utils/scaling';
 import globalStyle from '../../assets/styles/globalStyle';
 import {userStories, userPosts} from '../../mock/data';
+import {Routes} from '../../navigation/Routes';
 
-const App = () => {
+const Home = ({navigation}: {navigation: any}) => {
   const userStoriesPageSize = 6;
   const [userStoriesCurrentPage, setUserStoriesCurrentPage] = useState(1);
   const [userStoriesRenderedData, setUserStoriesRenderedData] = useState<
@@ -70,14 +71,14 @@ const App = () => {
             }
 
             setIsLoadingUserPosts(true);
-            const contentToAppend = pagination(
+            const contentToHomeend = pagination(
               userPosts,
               userPostsCurrentPage + 1,
               userPostsPageSize,
             );
-            if (contentToAppend.length > 0) {
+            if (contentToHomeend.length > 0) {
               setUserPostsCurrentPage(prev => prev + 1);
-              setUserPostsRenderedData(prev => [...prev, ...contentToAppend]);
+              setUserPostsRenderedData(prev => [...prev, ...contentToHomeend]);
             }
             setIsLoadingUserPosts(false);
           }}
@@ -85,7 +86,11 @@ const App = () => {
             <>
               <View style={style.header}>
                 <Title title="Let's Explore" />
-                <TouchableOpacity style={style.messageIcon}>
+                <TouchableOpacity
+                  style={style.messageIcon}
+                  onPress={() => {
+                    navigation.navigate(Routes.Profile);
+                  }}>
                   <FontAwesomeIcon
                     icon={faEnvelope}
                     size={horizontalScale(20)}
@@ -105,16 +110,16 @@ const App = () => {
                     }
 
                     setIsLoadingUserStories(true);
-                    const contentToAppend = pagination(
+                    const contentToHomeend = pagination(
                       userStories,
                       userStoriesCurrentPage + 1,
                       userStoriesPageSize,
                     );
-                    if (contentToAppend.length > 0) {
+                    if (contentToHomeend.length > 0) {
                       setUserStoriesCurrentPage(prev => prev + 1);
                       setUserStoriesRenderedData(prev => [
                         ...prev,
-                        ...contentToAppend,
+                        ...contentToHomeend,
                       ]);
                     }
                     setIsLoadingUserStories(false);
@@ -140,4 +145,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
